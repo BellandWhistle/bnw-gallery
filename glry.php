@@ -1,11 +1,10 @@
 <?php
 /*
 Plugin Name: BnW Gallery
-Plugin URI: bell-n-whistle.com/bnw-gallery
 Description: Gallery 
-Version: 1.0
+Version: 0.1
 Author: Bell & Whistle
-Author URI: http://bell-n-whistle.com
+Author URI: http://www.bell-n-whistle.com/
 */
 
 
