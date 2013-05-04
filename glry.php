@@ -32,60 +32,60 @@ register_activation_hook( __FILE__, 'glry_activation');
 
 function glry_activation()
 {
-	global $wp_rewrite;
+  global $wp_rewrite;
 
-	add_rewrite_endpoint('album', EP_PERMALINK);
-	
-	$wp_rewrite->flush_rules();
+  add_rewrite_endpoint('album', EP_PERMALINK);
+  
+  $wp_rewrite->flush_rules();
 }
 
 
 function add_gallery_data()
 {
-	$gallery_data = array(
-						'base_dir' 			=> glry_plugin_url('/'),
-						'glry_base_url' 	=> get_bloginfo('home')
-					);
-	echo '<script> var GLRY_data = '.json_encode($gallery_data).'; </script>';
+  $gallery_data = array(
+            'base_dir'      => glry_plugin_url('/'),
+            'glry_base_url'   => get_bloginfo('home')
+          );
+  echo '<script> var GLRY_data = '.json_encode($gallery_data).'; </script>';
 }
 
 function glry_add_assets()
 {
-	global $wp_query;
-	
-	if( is_attachment() or is_tag('gallery') or  isset( $wp_query->query['album'] ) )
-	{
-		// CSS
-		wp_enqueue_style('glry_css', glry_plugin_url('css/style.css') );
+  global $wp_query;
+  
+  if( is_attachment() or is_tag('gallery') or  isset( $wp_query->query['album'] ) )
+  {
+    // CSS
+    wp_enqueue_style('glry_css', glry_plugin_url('css/style.css') );
 
     wp_enqueue_style( 'twentytwelve-style', glry_plugin_url('css/blank.css') );
     wp_enqueue_style( 'twentytwelve-fonts', glry_plugin_url('css/blank.css') );
     
 
-		// JS
+    // JS
     wp_deregister_script( 'comment-reply' );
-		wp_deregister_script( 'jquery' );
-		wp_register_script( 'jquery', glry_plugin_url('js/jquery.js') );
-		wp_enqueue_script( 'jquery' );
+    wp_deregister_script( 'jquery' );
+    wp_register_script( 'jquery', glry_plugin_url('js/jquery.js') );
+    wp_enqueue_script( 'jquery' );
 
-		wp_register_script( 'glry_libs', glry_plugin_url('js/libs.js'), array( 'jquery' ) );
-		wp_enqueue_script( 'glry_libs' );
+    wp_register_script( 'glry_libs', glry_plugin_url('js/libs.js'), array( 'jquery' ) );
+    wp_enqueue_script( 'glry_libs' );
 
-		wp_register_script( 'glry_scripts', glry_plugin_url('js/scripts.js'), array( 'jquery', 'glry_libs' ) );
-		wp_enqueue_script( 'glry_scripts' );
-	}
+    wp_register_script( 'glry_scripts', glry_plugin_url('js/scripts.js'), array( 'jquery', 'glry_libs' ) );
+    wp_enqueue_script( 'glry_scripts' );
+  }
 }
 
 function glry_image_template($single_template)
 {
-	global $post, $query;
-	
-	if($post->post_type == 'attachment')
-	{
-		 $single_template = dirname( __FILE__ ) . '/template/template.php';
-		 // $single_template = dirname( __FILE__ ) . '/template/attachment.php';
-	}
-	return $single_template;
+  global $post, $query;
+  
+  if($post->post_type == 'attachment')
+  {
+     $single_template = dirname( __FILE__ ) . '/template/template.php';
+     // $single_template = dirname( __FILE__ ) . '/template/attachment.php';
+  }
+  return $single_template;
 }
 
 
@@ -93,11 +93,11 @@ function glry_tag_template( $template_file )
 {
     global $post;
 
-	$tag = get_queried_object();
+  $tag = get_queried_object();
 
      if ( is_tag ( 'gallery' ) ) {
-		$template_file = dirname( __FILE__ ) . '/template/template.php';
-		// $template_file = dirname( __FILE__ ) . '/template/tag.php';
+    $template_file = dirname( __FILE__ ) . '/template/template.php';
+    // $template_file = dirname( __FILE__ ) . '/template/tag.php';
      }
 
      return $template_file;
@@ -108,11 +108,11 @@ function glry_single_template( $template_file )
 {
     global $wp_query;
 
-	$tag = get_queried_object();
+  $tag = get_queried_object();
 
      if(isset( $wp_query->query['album'] )){
-		$template_file = dirname( __FILE__ ) . '/template/template.php';
-		// $template_file = dirname( __FILE__ ) . '/template/gallery.php';
+    $template_file = dirname( __FILE__ ) . '/template/template.php';
+    // $template_file = dirname( __FILE__ ) . '/template/gallery.php';
      }
 
      return $template_file;
