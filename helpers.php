@@ -73,3 +73,10 @@ function glry_adjacent_image_link($prev = true) {
   }
   return array(NULL, $actual, $total);
 }
+
+function _dump($var) {
+  echo '<pre>';
+  print_r($var);
+  echo '</pre>';
+  die();
+}
