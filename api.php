@@ -34,9 +34,9 @@ if( isset($_GET['action']) ){
                 'title'     => get_the_title(),
                 'id'      => get_the_ID(),
                 'order_id'    => $order++
-              );  
+              );
     }
-    
+
     // Little hack to fix the pagination links
     $_SERVER['REQUEST_URI'] = "/tag/gallery/page/".$paged;
     if (function_exists(wp_pagenavi)) {
@@ -57,7 +57,7 @@ if( isset($_GET['action']) ){
   {
     $postname = $_GET['albumname'];
 
-    // Obtenemosl el post del que estamos 
+    // Obtenemosl el post del que estamos
     $query = new WP_query(array('name' => $postname));
 
     $query = get_posts( array('name' => $postname) );
@@ -84,7 +84,7 @@ if( isset($_GET['action']) ){
       $tags = get_post_meta($post->ID, 'glry_tag');
 
       // solo data que necesitamos
-      // OJO: FALTA OBTENER EL BACK TO SLIDESHOW QUE 
+      // OJO: FALTA OBTENER EL BACK TO SLIDESHOW QUE
       // DEBE SER EL PRIMER ITEM DE LA LISTA DE PHOTOS
       $data   = array(
                         'ID'          => $photo->ID,
@@ -104,7 +104,7 @@ if( isset($_GET['action']) ){
 
     $response = array(
               'post_url'    => get_permalink(),
-              'total_photos'  => $order - 1,      
+              'total_photos'  => $order - 1,
                   'album_url'   => get_permalink($post->ID).'/album',
               'album_title' => get_the_title(),
               // 'permalink' => get_permalink().'/album',
