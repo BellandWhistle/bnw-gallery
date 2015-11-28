@@ -28,6 +28,24 @@ if( isset($_GET['action']) ){
       setup_postdata($post);
       $thumbnail_src = wp_get_attachment_image_src( get_post_thumbnail_id( get_the_ID() ) );
 
+      // If the spot doesn´t have a featured image
+      if (!$thumbnail_src) {
+        // The all the images attached to the spot.
+        $photos = get_children(array(
+          'post_parent'   => $post->ID,
+          'post_type'     => 'attachment',
+          'mime_type'     => 'image',
+          'order'     => 'DESC',
+          'orderby'     => 'none',
+          'numberposts' => 1
+        ));
+
+        if ($photos) {
+          $first_photo = array_shift(array_slice($photos, 0, 1));
+          $thumbnail_src = wp_get_attachment_image_src($first_photo->ID);
+        }
+      }
+
       $albums[] = array(
                 'permalink'   => get_permalink().'/album',
                 'thumbnail_src' => $thumbnail_src[0],
