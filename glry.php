@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: BnW Gallery
-Description: Gallery 
+Description: Gallery
 Version: 0.1
 Author: Bell & Whistle
 Author URI: http://www.bell-n-whistle.com/
@@ -18,7 +18,7 @@ add_action('template_redirect', 'glry_add_assets');
 add_action('wp_head', 'add_gallery_data');
 
 // Custom template
-add_filter( 'image_template', 'glry_image_template');
+add_filter( 'attachment_template', 'glry_image_template');
 add_filter( 'tag_template', 'glry_tag_template' );
 add_filter( 'single_template', 'glry_single_template' );
 
@@ -34,7 +34,7 @@ function glry_activation()
   global $wp_rewrite;
 
   add_rewrite_endpoint('album', EP_PERMALINK);
-  
+
   $wp_rewrite->flush_rules();
 }
 
@@ -51,15 +51,14 @@ function add_gallery_data()
 function glry_add_assets()
 {
   global $wp_query;
-  
-  if( is_attachment() or is_tag('gallery') or  isset( $wp_query->query['album'] ) )
+
+  if( is_attachment() or is_tag('gallery') or isset( $wp_query->query['album'] ) )
   {
     // CSS
     wp_enqueue_style('glry_css', glry_plugin_url('css/style.css') );
 
     wp_enqueue_style( 'twentytwelve-style', glry_plugin_url('css/blank.css') );
     wp_enqueue_style( 'twentytwelve-fonts', glry_plugin_url('css/blank.css') );
-    
 
     // JS
     wp_deregister_script( 'comment-reply' );
@@ -78,7 +77,7 @@ function glry_add_assets()
 function glry_image_template($single_template)
 {
   global $post, $query;
-  
+
   if($post->post_type == 'attachment')
   {
      $single_template = dirname( __FILE__ ) . '/template/template.php';
@@ -117,7 +116,7 @@ function glry_single_template( $template_file )
      return $template_file;
 }
 
- 
+
 /* Modificamos permalink */
 function add_query_vars($vars)
 {
