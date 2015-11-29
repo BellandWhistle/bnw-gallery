@@ -22,13 +22,14 @@ Por ahora BnW Gallery necesita tener instalado el plugin [WP-PageNavi](http://wo
 
 ## TODO / Planes
 1. Corregir la dependecia de WP-PageNavi o al menos hacerlo opcional.
-2. Ofrecer una API JS.
-3. Mudar el código a Coffeescript y usar [Chaplin](https://github.com/chaplinjs/chaplin)
+3. Mudar a React JS
 4. Mejorar la estética y transiciones, señalar que se está cargando o si algo falla.
-5. Manejar cualquier caso de permalink de Wordpress. (Cualquier idea aquí será bienvenida en cómo parsear la estructura elegida por el usuario sería muy apreciado)
 6. Ofrecer la alternativa de hacer que una o más tags o categorías sean manejados por BnW Gallery
 
 ## Changelog
+
+### 0.2 ###
+* Compatible with the latest version of WordPress
 
 ### 0.1 ###
 * Primera liberación
